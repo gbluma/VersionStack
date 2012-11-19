@@ -1,0 +1,14 @@
+
+
+* Use Git to version the services
+  /echo/b8ab3a0/hello/garrett
+  [prefix] [version] [action] [params...]
+
+* Hot-loading. Not restart setup
+* Supervisor script.
+  - cron'd every few minutes
+  - if executing too long, kill process, relaunch automatically
+  - if taking up too much memory, kill process, relaunch automatically
+  - log all ops..
+
+* 
