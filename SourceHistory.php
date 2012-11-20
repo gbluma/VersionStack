@@ -67,7 +67,7 @@ class SourceHistory
     $tree_guid = self::getTreeID($tag_guid);
     $file_guid = self::getFileId($tree_guid, $class);
     $source = self::getSourceObject($file_guid);
-		return  substr(self::renameClass($src, $class, $version), 5);
+		return  substr(self::renameClass($source, $class, $version), 5);
   }
 
   // ---------------------------------------------------------------------------
@@ -79,7 +79,7 @@ class SourceHistory
   }
 
   // ---------------------------------------------------------------------------
-  public static function listVersions($class) 
+  public static function listVersions() 
   {
 		$tags = explode("\n",trim(shell_exec("git tag")));
 		return $tags;

@@ -19,6 +19,7 @@ class EchoService extends Service
     switch($action) {
       case "hello":  return $this->hello($params); break;
       case "dbTest": return $this->dbTest($params); break;
+      case "only_in_v012": return $this->testing($params); break;
       default     :  return array(404, "text/html", "No action.");
     }
   }
@@ -40,6 +41,10 @@ class EchoService extends Service
       var_export($row, true)
     );
   }
+
+	public function testing($params) {
+    return array(200, "text/html", "something noteworthy");
+	}
 
 }
 
