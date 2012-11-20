@@ -17,7 +17,7 @@ class EchoService
 		switch($action) {
 			case "hello":	 return $this->hello($params); break;
 			case "dbTest": return $this->dbTest($params); break;
-			case "only_in_v012": return $this->testing($params); break;
+			case "something_new": return $this->testing($params); break;
 			default			:	 return array(404, "text/html", "No action.");
 		}
 	}
@@ -41,7 +41,7 @@ class EchoService
 	}
 
 	public function testing($params) {
-		return array(200, "text/html", "something noteworthy");
+		return array(200, "text/html", "something new");
 	}
 
 }

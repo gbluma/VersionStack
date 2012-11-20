@@ -11,32 +11,28 @@ class Exporter
 	}
 
 	// ---------------------------------------------------------------------------
-	public static function slugify($tag)
-	{
-		return preg_replace('/[^0-9A-Za-z]/','',$tag);
-	}
-	
-	// ---------------------------------------------------------------------------
 	public static function exportTag($tag) 
 	{
-		// make tag safer
-		$tag = self::slugify($tag);
-		
-		$output = shell_exec("rm -rf deploy/* && mkdir deploy/$tag "
-			."&& git archive master services | tar -x -C deploy/$tag");
+		$output = shell_exec("mkdir deploy/$tag "
+			."&& git archive $(cat .git/refs/tags/$tag) services | tar -x -C deploy/$tag 2>&1");
 		return $output;
 	}
 	
 	// ---------------------------------------------------------------------------
-	public static function exportTags()
+	public static function deployServlets()
 	{
+		shell_exec("rm -rf deploy/*");
 		$tags = self::listTags();
 		$exported = array();
 		foreach($tags as $tag) {
 			$response = self::exportTag($tag);
-			if (!strstr($response,'fatal')) {
+			//echo $response;
+			if (!strstr($response,'failure')) {
 				// save in list of successful tags
 				$exported[] = $tag;
+			} else {
+				// clean up
+				shell_exec("rm -rf deploy/$tag");
 			}
 		}
 		return $exported;
