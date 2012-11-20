@@ -6,6 +6,7 @@ require_once("SourceHistory.php");
 
 $versions = SourceHistory::listVersions();
 
+
 foreach ($versions as $version) {
 	try {
 		$src = SourceHistory::getSource($version, $class);
