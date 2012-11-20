@@ -44,7 +44,7 @@ class Reactor {
 		exit;
 	}
 	
-	public function run($service, $port) 
+	public function run($service, $port, $uid) 
 	{
 		// starts service
 
@@ -61,7 +61,7 @@ class Reactor {
 			// ... inside child process
 			$childpid = posix_getpid();
 
-			printf("Child %d listening on 127.0.0.1:$port".PHP_EOL, $childpid);
+			printf("Child %d [%s] listening on 127.0.0.1:%d".PHP_EOL, $childpid, $uid, $port);
 			while(1):
 				$socket = socket_accept($this->acceptor);
 

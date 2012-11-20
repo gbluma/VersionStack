@@ -10,9 +10,11 @@ function sig_handler() {
 	exit();
 }
 
-$tags = Exporter::deployServlets();
+// TODO: get list of intended tags from DB
+// TODO: get list of intended servlets from DB
+$deployed_tags = Exporter::deployServlets();
 
-foreach($tags as $tag) {
+foreach($deployed_tags as $tag) {
 	// start a new process for each version
 	$pid = pcntl_fork();
 	if($pid == 0) {
@@ -23,7 +25,7 @@ foreach($tags as $tag) {
 		
 		// start service
 		$r = new Reactor();
-		$r->run(new EchoService(), 9009);
+		$r->run(new EchoService(), $childpid, "EchoService-".$tag);
 	}
 }
 
@@ -34,6 +36,3 @@ while(pcntl_waitpid(0, $status) != -1):
 	printf("Child %s exited".PHP_EOL,$status);
 endwhile;
 
-
-//$r = new Reactor();
-//$r->run(new EchoService(), 9009);

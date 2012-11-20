@@ -13,8 +13,9 @@ class Exporter
 	// ---------------------------------------------------------------------------
 	public static function exportTag($tag) 
 	{
-		$output = shell_exec("mkdir deploy/$tag "
-			."&& git archive $(cat .git/refs/tags/$tag) services | tar -x -C deploy/$tag 2>&1");
+		$output = shell_exec("mkdir deploy/$tag && ".
+			"git archive $(cat .git/refs/tags/$tag) services 2>&1 | ".
+			"tar -x -C deploy/$tag 2>&1");
 		return $output;
 	}
 	
