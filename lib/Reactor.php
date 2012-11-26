@@ -67,7 +67,7 @@ class Reactor {
 
 				// try to parse headers
 				$headers = socket_read($socket,2048);
-				preg_match("/(GET|POST|HEAD|PUT|DELETE) ([^ ]+) HTTP/", $headers, $matches);
+				preg_match("/(GET|POST|HEAD|PUT|DELETE) ([^\s]+) HTTP/", $headers, $matches);
 				if (count($matches) > 1) {
 					// capture vars
 					$method = $matches[1];

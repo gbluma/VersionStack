@@ -3,7 +3,8 @@
 * Use Git to version the services
   /echo/b8ab3a0/hello/garrett
   [prefix] [version] [action] [params...]
-
+  
+* Build a proxy server to handle incoming requests and redirect them to the right places.
 * Hot-loading. Not restart setup
 * Supervisor script.
   - cron'd every few minutes
