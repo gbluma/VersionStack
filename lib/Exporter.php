@@ -26,6 +26,8 @@ class Exporter
 		$tags = self::listTags();
 		$exported = array();
 		foreach($tags as $tag) {
+      if (empty($tag)) continue;
+
 			$response = self::exportTag($tag);
 			//echo $response;
 			if (!strstr($response,'failure')) {

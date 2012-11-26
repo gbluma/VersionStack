@@ -13,6 +13,10 @@ function sig_handler() {
 // TODO: get list of intended tags from DB
 // TODO: get list of intended servlets from DB
 $deployed_tags = Exporter::deployServlets();
+if (empty($deployed_tags)) {
+  die("No tags can be exported. Exiting early.\n");
+}
+
 
 foreach($deployed_tags as $tag) {
 	// start a new process for each version
