@@ -20,13 +20,13 @@ class Exporter
 	}
 	
 	// ---------------------------------------------------------------------------
-	public static function deployServlets()
+	public static function deployServlets($allowedTags, $allowedServlets)
 	{
 		shell_exec("rm -rf deploy/*");
 		$tags = self::listTags();
 		$exported = array();
 		foreach($tags as $tag) {
-      if (empty($tag)) continue;
+      if (empty($tag) || !in_array($tag, $allowedTags) ) continue;
 
 			$response = self::exportTag($tag);
 			//echo $response;

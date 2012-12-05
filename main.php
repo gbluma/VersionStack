@@ -10,9 +10,10 @@ function sig_handler() {
 	exit();
 }
 
-// TODO: get list of intended tags from DB
-// TODO: get list of intended servlets from DB
-$deployed_tags = Exporter::deployServlets();
+$tags     = array("v0.2");
+$servlets = array("EchoService");
+
+$deployed_tags = Exporter::deployServlets($tags, $servlets);
 if (empty($deployed_tags)) {
   die("No tags can be exported. Exiting early.\n");
 }
