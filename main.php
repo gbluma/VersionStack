@@ -10,7 +10,7 @@ function sig_handler() {
 	exit();
 }
 
-$tags     = array("v0.2");
+$tags     = array("DEV", "HEAD", "v0.2");
 $servlets = array("EchoService");
 
 $deployed_tags = Exporter::deployServlets($tags, $servlets);
