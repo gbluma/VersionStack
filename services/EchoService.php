@@ -6,9 +6,9 @@ class EchoService
 	public function __construct() 
 	{
 		// do expensive stuff here.
-		$this->db = mysql_connect("localhost", "root", "........");
-		if (!$this->db) { echo "unable to connect"; }
-		if (!mysql_select_db("project")) { echo "unable to select db"; }
+		//$this->db = mysql_connect("localhost", "root", "........");
+		//if (!$this->db) { echo "unable to connect"; }
+		//if (!mysql_select_db("project")) { echo "unable to select db"; }
 	}
 
 
