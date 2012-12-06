@@ -7,23 +7,30 @@ class ProxyServlet
 	{
 		// connect to index
 		// get list of all services
+		$pids = explode("\n", shell_exec("ls ./run/*"));
+		$this->processes = array();
+		foreach($pids as $pid) {
+			$arr = explode('-', $pid);
+			if (count($arr) > 1) 
+				list($name, $version) = $arr;
+				if (!empty($pid)) {
+					$port = file_get_contents($pid);
+					$this->processes[] = compact('name','version','port');
+				}
+		}
 	}
 
 
 	public function route($method, $version="", $params=array()) 
 	{
-		switch($version) {
-			case "v0.1.3": 
-				$params['port'] = 28438;
+		foreach ($this->processes as $p) {
+			if ($version == $p['version']) {
+				$params['port'] = $p['port'];
 				return $this->proxy($params); 
-				break;
-			case "v0.1.4": 
-				$params['port'] = 28439;
-				return $this->proxy($params); 
-				break;
-			default:
-				return array(404, "text/html", "not found");
+				return;
+			}
 		}
+		return array(404, "text/html", "not found");
 	}
 
 
