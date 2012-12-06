@@ -12,7 +12,7 @@ class EchoService
 	}
 
 
-	public function route($method, $action="", $params=array()) 
+	public function route($method, $url, $action="", $params=array()) 
 	{
 		switch($action) {
 			case "hello":	 return $this->hello($params); break;

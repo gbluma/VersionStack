@@ -84,7 +84,7 @@ class Reactor {
 
 				try {
 
-					$result = $service->route($method, $action, $params);
+					$result = $service->route($method, $url, $action, $params);
 
 					if (count($result) > 2) {
 						$status_code = $result[0];

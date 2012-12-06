@@ -21,12 +21,13 @@ class ProxyServlet
 	}
 
 
-	public function route($method, $version="", $params=array()) 
+	public function route($method, $url, $version="", $params=array()) 
 	{
+		var_dump($url);
 		foreach ($this->processes as $p) {
 			if ($version == $p['version']) {
-				$params['port'] = $p['port'];
-				return $this->proxy($params); 
+				$url2 = preg_replace("#/".$version."/(.*)$#", '$1', $url);
+				return $this->proxy($url2, $p['port']); 
 				return;
 			}
 		}
@@ -34,11 +35,10 @@ class ProxyServlet
 	}
 
 
-	public function proxy($params) 
+	public function proxy($url, $port) 
 	{
-		$port = $params['port'];
-		$url = "http://127.0.0.1:$port/something_new";
-		
+		$url = "http://127.0.0.1:$port/$url";
+
 		// curl to endpoint
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
