@@ -6,17 +6,14 @@ require(ROOT_DIR."/lib/Reactor.php");
 require(ROOT_DIR."/lib/Exporter.php");
 require(ROOT_DIR."/lib/ProxyServlet.php");
 
-function sig_handler() {
-echo "bailing";
-exit();
-}
+function sig_handler() { echo "bailing"; exit(); }
 
 $tags     = array("DEV", "HEAD", "v0.2");
 $servlets = array("EchoService");
 
 $deployed_tags = Exporter::deployServlets($tags, $servlets);
 if (empty($deployed_tags)) {
-die("No tags can be exported. Exiting early.\n");
+	die("Fatal: No tags can be exported.\n");
 }
 shell_exec("rm -rf ./run/*");
 
