@@ -1,4 +1,3 @@
-
 VersionStack
 ============
 
@@ -10,24 +9,31 @@ dies, it should not cause any others to fail.
 
 Features
 --------
- * Easily serve multiple version of a service in tandem.
-   - Services are isolated.
-	 - New changes can be deployed without discarding old ones.
-	 - Clients can specify the version they want, so both parties are happy.
 
- * Versions are handled using plain Git tags.
+**Easily serve multiple version of a service in tandem.**
+
+  - Services are isolated.
+      - New changes can be deployed without discarding old ones.
+      - Clients can specify the version they want, so both parties are happy.
+
+**Versions are handled using plain Git tags.**
+
    - Copies of the source are exported to a deployment folder before running.
-	 - Each version runs in an isolated servlet.
+         - Each version runs in an isolated servlet.
 
- * Services are self-hosted PHP processes. 
-   - No dynamic Apache/Nginx configuration needed.
+**Services are self-hosted PHP processes.**
+
+   - No Apache/Nginx configuration needed.
    - Uses Unix process forking to achieve multiple deployments.
 
- * Services restart automatically if they die. 
-   - Supervisor process ensure that services restart properly
+**Services restart automatically if they die.**
+
+   - Supervisor process ensure that services restart properly. (pending)
 
 Why you shouldn't use it
 ------------------------
+
+ * There is currently no separation between project and framework.
  * Currently, your project MUST use Git for your project. VersionStack uses Git tags to export copies of the
    source and serve committed files. 
  * Self-hosted PHP web servers are experiemntal and thereforew not as safe as a fastcgi or Apache server. 
